@@ -7,7 +7,7 @@
 [![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-blue?logo=wezterm)](https://wezfurlong.org/wezterm/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey)]()
-[![Written in Lua](https://img.shields.io/badge/Config-Lua-2C2D72?logo=lua)]()
+[![Written in Lua](https://www.lua.org/about.html)]
 
 A **modular, Neovim-inspired configuration** for WezTerm, optimized for developers seeking speed, clarity, and complete control over their terminal workflow.
 
@@ -100,7 +100,7 @@ Behavior:
 
 > `LEADER` is defined as `Space` combined with `SUPER|CTRL`.
 
-Full keybinding reference: [KEYBINDINGS.md](./KEYBINDINGS.md)
+Full keybinding reference: [KEYBINDINGS.md](./Keybindings.md)
 
 ---
 
