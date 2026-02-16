@@ -1,0 +1,40 @@
+# ==========================================================
+# StyLua Configuration for Neovim (Lua 5.4)
+# Optimized for modular configs and plugin specs
+# ==========================================================
+
+# ----------------------------------------------------------
+# Core Formatting
+# ----------------------------------------------------------
+
+column_width = 120
+line_endings = "Unix"
+
+indent_type = "Spaces"
+indent_width = 2
+
+[sort_requires]
+enabled = true
+
+# ----------------------------------------------------------
+# Style Preferences
+# ----------------------------------------------------------
+
+quote_style = "AutoPreferDouble"       # Keep strings consistent
+call_parentheses = "NoSingleTable"     # Cleaner plugin specs
+collapse_simple_statement = "Never"    # Avoid inline control flow
+
+# ----------------------------------------------------------
+# Lua Parser
+# ----------------------------------------------------------
+
+syntax = "Lua54"
+
+# ----------------------------------------------------------
+# Ignore Generated or External Files
+# ----------------------------------------------------------
+
+[ignore]
+# Add paths if needed, for example:
+# "lua/generated/*"
+# "plugin/packer_compiled.lua"
