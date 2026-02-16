@@ -4,6 +4,8 @@
 
 </div>
 
+---
+
 <div align="center">
 
 [![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-blue?logo=wezterm)](https://wezterm.org/)
@@ -35,8 +37,6 @@ Key focuses:
 * Lua-based configuration
 * SSH and WSL integration
 * Advanced rendering features
-
-Official documentation: [wezfurlong.org](https://wezfurlong.org/wezterm/)
 
 ---
 
