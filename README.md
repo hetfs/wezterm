@@ -1,10 +1,13 @@
 <div align="center">
-  <img src="wezterm.png" alt="WezTerm Dev Environment" width="600"/>
-</div>
 
-[![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-blue?logo=wezterm)](https://wezfurlong.org/wezterm/)
+  <img src="./wzterm.png" alt="WezTerm Dev Environment" width="600"/>
+
+[![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-blue?logo=wezterm)](https://wezterm.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Written in Lua](https://img.shields.io/badge/Config-Lua-2C2D72?logo=lua)](https://www.lua.org/about.html)
+
+</div>
+
 ---
 
 A **modular, Neovim-inspired configuration** for WezTerm, optimized for developers seeking speed, clarity, and complete control over their terminal workflow.
