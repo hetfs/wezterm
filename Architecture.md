@@ -23,12 +23,12 @@ The configuration is split into focused modules instead of a monolithic `wezterm
 
 The project is organized into logical layers:
 
-* **Entry layer** – bootstrapper
-* **Configuration layer** – terminal behavior and composition
-* **Utility layer** – reusable helper functions
-* **Event layer** – UI-driven behavior
-* **Asset layer** – backgrounds and visual resources
-* **Tooling layer** – formatting, linting, and IDE configuration
+* **Entry layer** bootstrapper
+* **Configuration layer** terminal behavior and composition
+* **Utility layer** reusable helper functions
+* **Event layer** UI-driven behavior
+* **Asset layer** backgrounds and visual resources
+* **Tooling layer** formatting, linting, and IDE configuration
 
 Each layer has a clearly defined purpose and avoids leaking responsibilities.
 

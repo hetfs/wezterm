@@ -1,5 +1,7 @@
 <div align="center">
+
   <img src="./wzterm.png" alt="WezTerm Dev Environment" width="1000"/>
+
 </div>
 
 <div align="center">

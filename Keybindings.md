@@ -1,136 +1,173 @@
-# WezTerm Key Bindings Neovim-Native Workflow
+# WezTerm Key Bindings
 
-This document covers **every key and mouse binding** defined in your `bindings.lua` configuration, including smart navigation and all leader key tables.
+## Neovim-Native Workflow
+
+This document covers **every key and mouse binding** defined in your `bindings.lua` configuration, including smart navigation, leader key tables, and dynamic collision-safe mappings.
 
 ---
 
-## Modifier Model
+# Modifier Model
 
-| Name     | macOS Mapping | Windows/Linux Mapping |            |               |
-| -------- | ------------- | --------------------- | ---------- | ------------- |
-| `SUPER`  | ⌘ Command     | Alt                   |            |               |
-| `SUPER   | CTRL`         | ⌘ + Ctrl              | Alt + Ctrl |               |
-| `LEADER` | `SUPER        | CTRL + Space`         | `SUPER     | CTRL + Space` |
+| Name           | macOS Mapping        | Windows/Linux Mapping |
+| -------------- | -------------------- | --------------------- |
+| `SUPER`        | ⌘ Command            | Alt                   |
+| `SUPER + CTRL` | ⌘ + Ctrl             | Alt + Ctrl            |
+| `LEADER`       | SUPER + CTRL + Space | SUPER + CTRL + Space  |
 
 > `LEADER` is defined as `Space` with `SUPER|CTRL`.
 
 ---
 
-## Miscellaneous
+# System / Global
 
-| Key         | Action                        |
-| ----------- | ----------------------------- |
-| `F1`        | Activate Copy Mode            |
-| `F2`        | Open Command Palette          |
-| `F3`        | Show Launcher                 |
-| `F4`        | Launcher Fuzzy + Tabs       |
-| `F5`        | Launcher Fuzzy + Workspaces |
-| `F11`       | Toggle Fullscreen             |
-| `F12`       | Show Debug Overlay            |
-| `SUPER + f` | Search (case-insensitive)     |
-
----
-
-## URL Quick Select
-
-| Key         | Action                                                    |
-| ----------- | --------------------------------------------------------- |
-| `SUPER + u` | Quick-select URL under cursor and open in default browser |
-
-Supports common wrapped URL formats: `()`, `[]`, `{}`, `<>`, and raw links.
+| Key           | Action                   |                      |                    |
+| ------------- | ------------------------ | -------------------- | ------------------ |
+| `F1`          | Activate Copy Mode       |                      |                    |
+| `F2`          | Open Command Palette     |                      |                    |
+| `F3`          | Show Launcher            |                      |                    |
+| `F11`         | Toggle Fullscreen        |                      |                    |
+| `F12`         | Show Debug Overlay       |                      |                    |
+| `Enter + ALT` | Toggle Fullscreen        |                      |                    |
+| `R + CTRL`    | Reload configuration     |                      |                    |
+| `R + SHIFT    | CTRL`                    | Reload configuration |                    |
+| `P + CTRL`    | Activate Command Palette |                      |                    |
+| `T + CTRL`    | Show Launcher            |                      |                    |
+| `T + SHIFT    | CTRL`                    | Show Launcher        |                    |
+| `N + CTRL`    | Spawn new window         |                      |                    |
+| `E + SUPER    | SHIFT`                   | Rename current tab   |                    |
+| `E + CTRL     | SHIFT                    | ALT`                 | Toggle colorscheme |
+| `o + CTRL     | SHIFT`                   | Toggle background    |                    |
+| `o + CTRL     | ALT                      | SHIFT`               | Toggle opacity     |
 
 ---
 
-## Cursor Movement (Shell Navigation Enhancements)
+# Clipboard
 
-| Key                  | Action                      |
-| -------------------- | --------------------------- |
-| `SUPER + LeftArrow`  | Jump to line start          |
-| `SUPER + RightArrow` | Jump to line end            |
-| `SUPER + Backspace`  | Delete to beginning of line |
-
-These send terminal escape sequences for improved CLI ergonomics.
-
----
-
-## Clipboard
-
-| Key                | Action                      |
-| ------------------ | --------------------------- |
-| `CTRL + SHIFT + c` | Copy to system clipboard    |
-| `CTRL + SHIFT + v` | Paste from system clipboard |
+| Key                | Action                       |
+| ------------------ | ---------------------------- |
+| `CTRL + SHIFT + C` | Copy to system clipboard     |
+| `CTRL + SHIFT + V` | Paste from system clipboard  |
+| `V + CTRL`         | Paste from system clipboard  |
+| `Insert + SHIFT`   | Paste from primary selection |
+| `Insert + CTRL`    | Copy to primary selection    |
 
 ---
 
-## Tab Management
+# Font Controls
 
-| Key         | Action                       |                                     |
-| ----------- | ---------------------------- | ----------------------------------- |
-| `SUPER + t` | Open new tab (DefaultDomain) |                                     |
-| `SUPER      | CTRL + t`                    | Open new tab (WSL:Ubuntu domain)    |
-| `SUPER      | CTRL + w`                    | Close current tab (no confirmation) |
-| `SUPER + [` | Activate previous tab        |                                     |
-| `SUPER + ]` | Activate next tab            |                                     |
-| `SUPER      | CTRL + [`                    | Move tab left                       |
-| `SUPER      | CTRL + ]`                    | Move tab right                      |
+| Key            | Action             |
+| -------------- | ------------------ |
+| `+ / = + CTRL` | Increase font size |
+| `- + CTRL`     | Decrease font size |
+| `0 + CTRL`     | Reset font size    |
+| `- + SUPER`    | Decrease font size |
+| `= + SUPER`    | Increase font size |
+| `0 + SUPER`    | Reset font size    |
+| `) + CTRL`     | Reset font size    |
 
 ---
 
-## Window Management
+# Tab Navigation
+
+| Key          | Action                 |                       |
+| ------------ | ---------------------- | --------------------- |
+| `Tab + CTRL` | Activate next tab      |                       |
+| `Tab + SHIFT | CTRL`                  | Activate previous tab |
+| `[ + SUPER`  | Activate previous tab  |                       |
+| `] + SUPER`  | Activate next tab      |                       |
+| `{ + SUPER`  | Activate previous tab  |                       |
+| `} + SUPER`  | Activate next tab      |                       |
+| `1–5 + CTRL` | Activate tab 1–5       |                       |
+| `! + CTRL`   | Activate tab 0         |                       |
+| `@ + CTRL`   | Activate tab 1         |                       |
+| `# + CTRL`   | Activate tab 2         |                       |
+| `$ + CTRL`   | Activate tab 3         |                       |
+| `% + CTRL`   | Activate tab 4         |                       |
+| `^ + CTRL`   | Activate tab 5         |                       |
+| `& + CTRL`   | Activate tab 6         |                       |
+| `* + CTRL`   | Activate tab 7         |                       |
+| `( + CTRL`   | Activate last tab (-1) |                       |
+
+---
+
+# Tab Management
+
+| Key         | Action                                |
+| ----------- | ------------------------------------- |
+| `SUPER + t` | Open new tab (DefaultDomain)          |
+| `w + SUPER` | Close current tab (with confirmation) |
+
+---
+
+# Window Management
 
 | Key         | Action           |
 | ----------- | ---------------- |
-| `SUPER + n` | Spawn new window |
+| `N + SUPER` | Spawn new window |
 
 ---
 
-## Background Controls
+# Background Controls
 
-| Key         | Action                    |                         |
-| ----------- | ------------------------- | ----------------------- |
-| `SUPER + /` | Set random background     |                         |
-| `SUPER + ,` | Cycle background backward |                         |
-| `SUPER + .` | Cycle background forward  |                         |
-| `SUPER      | CTRL + /`                 | Fuzzy-select background |
-
-The fuzzy selector opens an interactive list from `backdrops:choices()`.
+| Key       | Action |                   |                |
+| --------- | ------ | ----------------- | -------------- |
+| `o + CTRL | SHIFT` | Toggle background |                |
+| `o + CTRL | ALT    | SHIFT`            | Toggle opacity |
 
 ---
 
-## Pane Management
+# Pane Management
 
-| Key             | Action                               |                    |
-| --------------- | ------------------------------------ | ------------------ |
-| `SUPER + \`     | Split vertically                     |                    |
-| `SUPER          | CTRL + `                             | Split horizontally |
-| `SUPER + Enter` | Toggle pane zoom                     |                    |
-| `SUPER + w`     | Close current pane (no confirmation) |                    |
-
----
-
-## Smart Pane Navigation — Neovim Style
-
-These use `SUPER|CTRL`.
-
-| Key | Action                               |
-| --- | ------------------------------------ |
-| `h` | Move left fallback to previous tab |
-| `l` | Move right fallback to next tab    |
-| `k` | Move up                              |
-| `j` | Move down                            |
-
-If horizontal movement fails, it switches tabs automatically.
+| Key               | Action                            |
+| ----------------- | --------------------------------- |
+| `h/j/k/l + SUPER` | Activate pane in direction        |
+| `Z + CTRL`        | Toggle pane zoom                  |
+| `X + CTRL`        | Activate copy mode                |
+| `\\ + LEADER`     | Split horizontally                |
+| `- + LEADER`      | Split vertically                  |
+| `c + LEADER`      | Spawn new tab (CurrentPaneDomain) |
+| `q + LEADER`      | Close current pane                |
+| `Enter + ALT`     | Toggle fullscreen for pane        |
 
 ---
 
-## Leader Key Tables
+# Smart Pane Navigation (Neovim Style)
 
-Leader is:
-`SUPER|CTRL + Space`
+| Key | Action                             |
+| --- | ---------------------------------- |
+| `h` | Move left (fallback: previous tab) |
+| `l` | Move right (fallback: next tab)    |
+| `k` | Move up                            |
+| `j` | Move down                          |
 
 ---
 
-### Leader + f → Font Resize Mode
+# Leader Key Tables
+
+Leader: `SUPER + CTRL + Space`
+
+---
+
+## Leader + Pane Movement / Resize
+
+| Key  | Action             |
+| ---- | ------------------ |
+| `h`  | Move pane left     |
+| `j`  | Move pane down     |
+| `k`  | Move pane up       |
+| `l`  | Move pane right    |
+| `H`  | Resize pane left   |
+| `J`  | Resize pane down   |
+| `K`  | Resize pane up     |
+| `L`  | Resize pane right  |
+| `\\` | Split horizontal   |
+| `-`  | Split vertical     |
+| `c`  | Spawn new tab      |
+| `q`  | Close current pane |
+
+---
+
+## Leader + Font Resize Mode
 
 | Key      | Action             |
 | -------- | ------------------ |
@@ -142,45 +179,21 @@ Leader is:
 
 ---
 
-### Leader + p → Pane Resize Mode
+# Mouse Bindings
 
-| Key      | Action       |
-| -------- | ------------ |
-| `k`      | Resize up    |
-| `j`      | Resize down  |
-| `h`      | Resize left  |
-| `l`      | Resize right |
-| `Escape` | Exit mode    |
-| `q`      | Exit mode    |
-
-Each key press adjusts by 1 cell.
+| Input               | Action                          |
+| ------------------- | ------------------------------- |
+| `CTRL + Left Click` | Open link at mouse cursor       |
+| `Left Click`        | Complete selection to clipboard |
+| `Triple Left Click` | Select semantic text zone       |
 
 ---
 
-### Leader + s → Pane Swap Mode
-
-Swap active pane with numbered target while keeping focus.
-
-| Key      | Action              |
-| -------- | ------------------- |
-| `1–0`    | Swap with pane 1–10 |
-| `Escape` | Exit mode           |
-| `q`      | Exit mode           |
-
----
-
-## Mouse Binding
-
-| Input               | Action                    |
-| ------------------- | ------------------------- |
-| `CTRL + Left Click` | Open link at mouse cursor |
-
----
-
-## Configuration Characteristics
+# Notes
 
 * Default WezTerm keybindings are disabled.
 * Leader-based modal system mirrors Neovim workflows.
-* Horizontal smart navigation falls back to tab switching.
-* Background management integrates with your custom `backdrops` module.
-* WSL tab spawning is directly mapped for Windows environments.
+* Horizontal pane movement falls back to tab switching.
+* Background management integrates with the `backdrops` module.
+* All keys are collision-safe; any duplicates will error on startup.
+* SUPER / CTRL modifiers are platform-aware.
