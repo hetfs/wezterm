@@ -1,17 +1,13 @@
 <div align="center">
-
   <img src="./wzterm.png" alt="WezTerm Dev Environment" width="1000"/>
-
 </div>
 
----
-
 <div align="center">
-  
+
 [![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-blue?logo=wezterm)](https://wezterm.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Written in Lua](https://img.shields.io/badge/Config-Lua-2C2D72?logo=lua)](https://www.lua.org/about.html)
-  
+
 </div>
 
 ---
