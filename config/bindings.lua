@@ -43,7 +43,7 @@ local keys = {
   -- Search / Quick Select
   -- ---------------------------------------------------
   { key = "f", mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = "" }) },
-  { key = "F", mods = "CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
+  { key = "F", mods = mod.SUPER, action = act.Search("CurrentSelectionOrEmptyString") },
   { key = "phys:Space", mods = "SHIFT|CTRL", action = act.QuickSelect },
   {
     key = "u",
@@ -106,9 +106,8 @@ local keys = {
   -- ---------------------------------------------------
   -- Font Size
   -- ---------------------------------------------------
-  { key = "+", mods = "CTRL", action = act.IncreaseFontSize },
-  { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
   { key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+  { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
   { key = "0", mods = "CTRL", action = act.ResetFontSize },
 
   -- ---------------------------------------------------
@@ -117,7 +116,7 @@ local keys = {
   { key = "\\", mods = mod.SUPER, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
   { key = "\\", mods = mod.SUPER_REV, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
-  { key = "Z", mods = "CTRL", action = act.TogglePaneZoomState },
+  { key = "z", mods = mod.SUPER_REV, action = act.TogglePaneZoomState },
   { key = "X", mods = "CTRL", action = act.ActivateCopyMode },
   { key = "phys:Space", mods = "SHIFT|CTRL", action = act.QuickSelect },
   { key = "w", mods = mod.SUPER, action = act.CloseCurrentPane({ confirm = true }) },
@@ -126,6 +125,12 @@ local keys = {
   { key = "j", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Down") },
   { key = "k", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Up") },
   { key = "l", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Right") },
+
+  { key = "H", mods = mod.SUPER_REV, action = act.AdjustPaneSize({ "Left", 3 }) },
+  { key = "J", mods = mod.SUPER_REV, action = act.AdjustPaneSize({ "Down", 3 }) },
+  { key = "K", mods = mod.SUPER_REV, action = act.AdjustPaneSize({ "Up", 3 }) },
+  { key = "L", mods = mod.SUPER_REV, action = act.AdjustPaneSize({ "Right", 3 }) },
+
   {
     key = "p",
     mods = mod.SUPER_REV,
@@ -163,46 +168,30 @@ local keys = {
     }),
   },
 
-  -- -- ---------------------------------------------------
-  -- -- Leader Key Actions
-  -- -- ---------------------------------------------------
-  -- { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-  -- { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-  -- { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-  -- { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-  --
-  -- { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 3 }) },
-  -- { key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 3 }) },
-  -- { key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 3 }) },
-  -- { key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 3 }) },
-  --
-  -- { key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-  -- { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  -- { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-  -- { key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
+    ---------------------------------------------------------------------
+    ----- Pane Management (Leader)
+    ---------------------------------------------------------------------
+    ---{ key = "LeftArrow", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+    ---{ key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    ---{ key = "UpArrow", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+    ---{ key = "DownArrow", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+    ---
+    ---{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+    ---{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    ---{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+    ---{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+    ---
+    -- { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 3 }) },
+    -- { key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 3 }) },
+    -- { key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 3 }) },
+    -- { key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 3 }) },
+    ---
+    ---{ key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    ---{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    ---{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+    ---{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 }
 
--- =====================================================
--- Key Tables
--- =====================================================
-
--- local key_tables = {
---   resize_font = {
---     { key = "k", action = act.IncreaseFontSize },
---     { key = "j", action = act.DecreaseFontSize },
---     { key = "r", action = act.ResetFontSize },
---     { key = "Escape", action = "PopKeyTable" },
---     { key = "q", action = "PopKeyTable" },
---   },
---   resize_pane = {
---     { key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
---     { key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
---     { key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
---     { key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
---     { key = "Escape", action = "PopKeyTable" },
---     { key = "q", action = "PopKeyTable" },
---   },
--- }
 
 -- =====================================================
 -- Mouse Bindings
@@ -232,8 +221,7 @@ local mouse_bindings = {
 
 return {
   disable_default_key_bindings = true,
-  leader = { key = "Space", mods = mod.SUPER_REV },
+  leader = { key = "Space", mods = mod.SUPER_REV, timeout_milliseconds = 1000 },
   keys = keys,
-  -- key_tables = key_tables,
   mouse_bindings = mouse_bindings,
 }

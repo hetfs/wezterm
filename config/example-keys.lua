@@ -171,12 +171,13 @@ function M.setup(config)
     -- Pane Management (Leader)
     ------------------------------------------------------------------
     { key = "LeftArrow", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-    { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
     { key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-    { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
     { key = "UpArrow", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-    { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
     { key = "DownArrow", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+
+    { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+    { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+    { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
     { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 
     { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 3 }) },
