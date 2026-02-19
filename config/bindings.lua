@@ -1,6 +1,6 @@
--- ─────────────────────────────────────────────
--- WezTerm Key System (Neovim Native + Safe)
--- ─────────────────────────────────────────────
+-- =====================================================
+-- WezTerm Configuration
+-- =====================================================
 
 local wezterm = require("wezterm")
 local act = wezterm.action
@@ -8,195 +8,206 @@ local act = wezterm.action
 local platform = require("utils.platform")()
 local backdrops = require("utils.backdrops")
 
--- ─────────────────────────────────────────────
+-- =====================================================
 -- Platform Modifiers
--- ─────────────────────────────────────────────
+-- =====================================================
+
 local mod = {}
 
 if platform.is_mac then
   mod.SUPER = "SUPER"
   mod.SUPER_REV = "SUPER|CTRL"
-else
-  mod.SUPER = "ALT"
+elseif platform.is_win or platform.is_linux then
+  mod.SUPER = "ALT"         -- Avoid Windows key conflicts
   mod.SUPER_REV = "ALT|CTRL"
 end
 
--- ─────────────────────────────────────────────
--- Leader Definition
--- ─────────────────────────────────────────────
-local leader = {
-  key = "Space",
-  mods = mod.SUPER_REV,
-  timeout_milliseconds = 1000,
-}
+-- =====================================================
+-- Key Bindings
+-- =====================================================
 
--- ─────────────────────────────────────────────
--- Collision-Safe Registration
--- ─────────────────────────────────────────────
-local keys = {}
-local seen = {}
+local keys = {
 
-local function register(key, mods, action)
-  local id = mods .. "|" .. key
-  if seen[id] then
-    error("Key collision detected: " .. id)
-  end
-  seen[id] = true
-  keys[#keys + 1] = {
-    key = key,
-    mods = mods,
-    action = action,
-  }
-end
+  -- ---------------------------------------------------
+  -- Function Keys / System
+  -- ---------------------------------------------------
+  { key = "F1",  mods = "NONE", action = "ActivateCopyMode" },
+  { key = "F2",  mods = "NONE", action = act.ActivateCommandPalette },
+  { key = "F3",  mods = "NONE", action = act.ShowLauncher },
+  { key = "F4",  mods = "NONE", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+  { key = "F5",  mods = "NONE", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+  { key = "F11", mods = "NONE", action = act.ToggleFullScreen },
+  { key = "F12", mods = "NONE", action = act.ShowDebugOverlay },
 
--- ─────────────────────────────────────────────
--- SYSTEM / GLOBAL
--- ─────────────────────────────────────────────
-register("F1", "NONE", act.ActivateCopyMode)
-register("F2", "NONE", act.ActivateCommandPalette)
-register("F3", "NONE", act.ShowLauncher)
-register("F11", "NONE", act.ToggleFullScreen)
-register("F12", "NONE", act.ShowDebugOverlay)
-
-register("Enter", "ALT", act.ToggleFullScreen)
-
-register("R", "CTRL", act.ReloadConfiguration)
-register("P", "CTRL", act.ActivateCommandPalette)
-register("T", "CTRL", act.ShowLauncher)
-register("N", "CTRL", act.SpawnWindow)
-
--- Background / opacity
-register("o", "CTRL|SHIFT", wezterm.action.EmitEvent("toggle-background"))
-register("o", "CTRL|ALT|SHIFT", wezterm.action.EmitEvent("toggle-opacity"))
-
--- Colorscheme toggle
-register("E", "CTRL|SHIFT|ALT", wezterm.action.EmitEvent("toggle-colorscheme"))
-
--- Rename tab
-register("E", mod.SUPER .. "|SHIFT", act.PromptInputLine({
-  description = "Rename Tab",
-  action = wezterm.action_callback(function(window, _, line)
-    if line then
-      window:active_tab():set_title(line)
-    end
-  end),
-}))
-
--- ─────────────────────────────────────────────
--- CLIPBOARD
--- ─────────────────────────────────────────────
-register("c", "CTRL|SHIFT", act.CopyTo("Clipboard"))
-register("v", "CTRL|SHIFT", act.PasteFrom("Clipboard"))
-register("Insert", "SHIFT", act.PasteFrom("PrimarySelection"))
-register("Insert", "CTRL", act.CopyTo("PrimarySelection"))
-
--- ─────────────────────────────────────────────
--- FONT CONTROL
--- ─────────────────────────────────────────────
-register("=", "CTRL", act.IncreaseFontSize)
-register("-", "CTRL", act.DecreaseFontSize)
-register("0", "CTRL", act.ResetFontSize)
-
-register("=", mod.SUPER, act.IncreaseFontSize)
-register("-", mod.SUPER, act.DecreaseFontSize)
-register("0", mod.SUPER, act.ResetFontSize)
-
--- ─────────────────────────────────────────────
--- TAB NAVIGATION
--- ─────────────────────────────────────────────
-register("Tab", "CTRL", act.ActivateTabRelative(1))
-register("Tab", "SHIFT|CTRL", act.ActivateTabRelative(-1))
-
-register("[", mod.SUPER, act.ActivateTabRelative(-1))
-register("]", mod.SUPER, act.ActivateTabRelative(1))
-
-register("[", mod.SUPER_REV, act.MoveTabRelative(-1))
-register("]", mod.SUPER_REV, act.MoveTabRelative(1))
-
-for i = 1, 8 do
-  register(tostring(i), "CTRL", act.ActivateTab(i - 1))
-end
-
--- ─────────────────────────────────────────────
--- TAB MANAGEMENT
--- ─────────────────────────────────────────────
-register("t", mod.SUPER, act.SpawnTab("DefaultDomain"))
-register("w", mod.SUPER, act.CloseCurrentTab({ confirm = true }))
-register("n", mod.SUPER, act.SpawnWindow)
-
--- ─────────────────────────────────────────────
--- NEOVIM-NATIVE PANE NAVIGATION
--- ─────────────────────────────────────────────
-register("h", mod.SUPER, act.ActivatePaneDirection("Left"))
-register("j", mod.SUPER, act.ActivatePaneDirection("Down"))
-register("k", mod.SUPER, act.ActivatePaneDirection("Up"))
-register("l", mod.SUPER, act.ActivatePaneDirection("Right"))
-
-register("z", "CTRL", act.TogglePaneZoomState)
-register("x", "CTRL", act.ActivateCopyMode)
-
--- ─────────────────────────────────────────────
--- SCROLL / PROMPT NAVIGATION
--- ─────────────────────────────────────────────
-register("PageUp", "SHIFT", act.ScrollByPage(-1))
-register("PageDown", "SHIFT", act.ScrollByPage(1))
-register("UpArrow", "SHIFT|CTRL", act.ScrollToPrompt(-1))
-register("DownArrow", "SHIFT|CTRL", act.ScrollToPrompt(1))
-
--- ─────────────────────────────────────────────
--- QUICK SELECT
--- ─────────────────────────────────────────────
-register("phys:Space", "SHIFT|CTRL", act.QuickSelect)
-
--- ─────────────────────────────────────────────
--- HYDRA LEADER ACTIVATION
--- ─────────────────────────────────────────────
-register("Space", mod.SUPER_REV, act.ActivateKeyTable({
-  name = "leader",
-  one_shot = false,
-}))
-
--- ─────────────────────────────────────────────
--- LEADER KEY TABLE
--- ─────────────────────────────────────────────
-local key_tables = {
-  leader = {
-    { key = "Escape", action = "PopKeyTable" },
-    { key = "Space", action = "PopKeyTable" },
-
-    -- Pane navigation
-    { key = "h", action = act.ActivatePaneDirection("Left") },
-    { key = "j", action = act.ActivatePaneDirection("Down") },
-    { key = "k", action = act.ActivatePaneDirection("Up") },
-    { key = "l", action = act.ActivatePaneDirection("Right") },
-
-    -- Resize
-    { key = "H", action = act.AdjustPaneSize({ "Left", 3 }) },
-    { key = "J", action = act.AdjustPaneSize({ "Down", 3 }) },
-    { key = "K", action = act.AdjustPaneSize({ "Up", 3 }) },
-    { key = "L", action = act.AdjustPaneSize({ "Right", 3 }) },
-
-    -- Splits
-    { key = "\\", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-
-    -- Pane control
-    { key = "z", action = act.TogglePaneZoomState },
-    { key = "x", action = act.CloseCurrentPane({ confirm = true }) },
-    { key = "b", action = act.RotatePanes("Clockwise") },
-    { key = "B", action = act.RotatePanes("CounterClockwise") },
-
-    -- Tabs
-    { key = "t", action = act.SpawnTab("CurrentPaneDomain") },
-    { key = "n", action = act.ActivateTabRelative(1) },
-    { key = "p", action = act.ActivateTabRelative(-1) },
-    { key = "c", action = act.CloseCurrentTab({ confirm = true }) },
+  -- ---------------------------------------------------
+  -- Search / Quick Select
+  -- ---------------------------------------------------
+  { key = "f", mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = "" }) },
+  { key = "F", mods = "CTRL", action = act.Search("CurrentSelectionOrEmptyString") },
+  { key = "phys:Space", mods = "SHIFT|CTRL", action = act.QuickSelect },
+  {
+    key = "u",
+    mods = mod.SUPER,
+    action = wezterm.action.QuickSelectArgs({
+      label = "open url",
+      patterns = {
+        "\\((https?://\\S+)\\)",
+        "\\[(https?://\\S+)\\]",
+        "\\{(https?://\\S+)\\}",
+        "<(https?://\\S+)>",
+        "\\bhttps?://\\S+[)/a-zA-Z0-9-]+",
+      },
+      action = wezterm.action_callback(function(window, pane)
+        local url = window:get_selection_text_for_pane(pane)
+        wezterm.open_with(url)
+      end),
+    }),
   },
+
+  -- ---------------------------------------------------
+  -- Clipboard
+  -- ---------------------------------------------------
+  { key = "C", mods = "CTRL", action = act.CopyTo("Clipboard") },
+  { key = "c", mods = mod.SUPER, action = act.CopyTo("Clipboard") },
+  { key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+  { key = "v", mods = mod.SUPER, action = act.PasteFrom("Clipboard") },
+  { key = "Insert", mods = "SHIFT", action = act.PasteFrom("PrimarySelection") },
+  { key = "Insert", mods = "CTRL", action = act.CopyTo("PrimarySelection") },
+  { key = "Copy", mods = "NONE", action = act.CopyTo("Clipboard") },
+  { key = "Paste", mods = "NONE", action = act.PasteFrom("Clipboard") },
+
+  -- ---------------------------------------------------
+  -- Tab Management
+  -- ---------------------------------------------------
+  { key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
+  { key = "Tab", mods = "SHIFT|CTRL", action = act.ActivateTabRelative(-1) },
+
+  { key = "t", mods = mod.SUPER, action = act.SpawnTab("DefaultDomain") },
+  { key = "t", mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = "WSL:Ubuntu" }) },
+  { key = "w", mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
+  { key = "[", mods = mod.SUPER, action = act.ActivateTabRelative(-1) },
+  { key = "]", mods = mod.SUPER, action = act.ActivateTabRelative(1) },
+  { key = "[", mods = mod.SUPER_REV, action = act.MoveTabRelative(-1) },
+  { key = "]", mods = mod.SUPER_REV, action = act.MoveTabRelative(1) },
+
+  { key = "1", mods = "CTRL", action = act.ActivateTab(0) },
+  { key = "2", mods = "CTRL", action = act.ActivateTab(1) },
+  { key = "3", mods = "CTRL", action = act.ActivateTab(2) },
+  { key = "4", mods = "CTRL", action = act.ActivateTab(3) },
+  { key = "5", mods = "CTRL", action = act.ActivateTab(4) },
+
+  -- ---------------------------------------------------
+  -- Window
+  -- ---------------------------------------------------
+  { key = "Enter", mods = "ALT", action = act.ToggleFullScreen },
+  { key = "m", mods = mod.SUPER, action = act.Hide },
+  { key = "n", mods = mod.SUPER, action = act.SpawnWindow },
+
+  -- ---------------------------------------------------
+  -- Font Size
+  -- ---------------------------------------------------
+  { key = "+", mods = "CTRL", action = act.IncreaseFontSize },
+  { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+  { key = "=", mods = "CTRL", action = act.IncreaseFontSize },
+  { key = "0", mods = "CTRL", action = act.ResetFontSize },
+
+  -- ---------------------------------------------------
+  -- Pane Management
+  -- ---------------------------------------------------
+  { key = "\\", mods = mod.SUPER, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "\\", mods = mod.SUPER_REV, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+
+  { key = "Z", mods = "CTRL", action = act.TogglePaneZoomState },
+  { key = "X", mods = "CTRL", action = act.ActivateCopyMode },
+  { key = "phys:Space", mods = "SHIFT|CTRL", action = act.QuickSelect },
+  { key = "w", mods = mod.SUPER, action = act.CloseCurrentPane({ confirm = true }) },
+
+  { key = "h", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Left") },
+  { key = "j", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Down") },
+  { key = "k", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Up") },
+  { key = "l", mods = mod.SUPER_REV, action = act.ActivatePaneDirection("Right") },
+  {
+    key = "p",
+    mods = mod.SUPER_REV,
+    action = act.PaneSelect({ alphabet = "1234567890", mode = "SwapWithActiveKeepFocus" }),
+  },
+
+  -- ---------------------------------------------------
+  -- Background Control
+  -- ---------------------------------------------------
+  {
+    key = "/",
+    mods = mod.SUPER,
+    action = wezterm.action_callback(function(window) backdrops:random(window) end),
+  },
+  {
+    key = ",",
+    mods = mod.SUPER,
+    action = wezterm.action_callback(function(window) backdrops:cycle_back(window) end),
+  },
+  {
+    key = ".",
+    mods = mod.SUPER,
+    action = wezterm.action_callback(function(window) backdrops:cycle_forward(window) end),
+  },
+  {
+    key = "/",
+    mods = mod.SUPER_REV,
+    action = act.InputSelector({
+      title = "Select Background",
+      choices = backdrops:choices(),
+      fuzzy = true,
+      action = wezterm.action_callback(function(window, _, idx)
+        backdrops:set_img(window, tonumber(idx))
+      end),
+    }),
+  },
+
+  -- -- ---------------------------------------------------
+  -- -- Leader Key Actions
+  -- -- ---------------------------------------------------
+  -- { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+  -- { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+  -- { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+  -- { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+  --
+  -- { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 3 }) },
+  -- { key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 3 }) },
+  -- { key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 3 }) },
+  -- { key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 3 }) },
+  --
+  -- { key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  -- { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  -- { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+  -- { key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 }
 
--- ─────────────────────────────────────────────
--- MOUSE
--- ─────────────────────────────────────────────
+-- =====================================================
+-- Key Tables
+-- =====================================================
+
+-- local key_tables = {
+--   resize_font = {
+--     { key = "k", action = act.IncreaseFontSize },
+--     { key = "j", action = act.DecreaseFontSize },
+--     { key = "r", action = act.ResetFontSize },
+--     { key = "Escape", action = "PopKeyTable" },
+--     { key = "q", action = "PopKeyTable" },
+--   },
+--   resize_pane = {
+--     { key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
+--     { key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
+--     { key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
+--     { key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+--     { key = "Escape", action = "PopKeyTable" },
+--     { key = "q", action = "PopKeyTable" },
+--   },
+-- }
+
+-- =====================================================
+-- Mouse Bindings
+-- =====================================================
+
 local mouse_bindings = {
   {
     event = { Up = { streak = 1, button = "Left" } },
@@ -215,13 +226,14 @@ local mouse_bindings = {
   },
 }
 
--- ─────────────────────────────────────────────
--- EXPORT
--- ─────────────────────────────────────────────
+-- =====================================================
+-- Final Config
+-- =====================================================
+
 return {
   disable_default_key_bindings = true,
-  leader = leader,
+  leader = { key = "Space", mods = mod.SUPER_REV },
   keys = keys,
-  key_tables = key_tables,
+  -- key_tables = key_tables,
   mouse_bindings = mouse_bindings,
 }
