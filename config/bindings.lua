@@ -28,6 +28,32 @@ end
 
 local keys = {
 
+-- =====================================================
+-- Open WezTerm configuration in your editor
+-- =====================================================
+{
+  key = "`",
+  mods = "CTRL",
+  action = wezterm.action_callback(function(window)
+    local editor = os.getenv("EDITOR") or "nvim"
+    -- local config = os.getenv("WEZTERM_CONFIG_FILE")
+	local config =  os.getenv("WEZTERM_CONFIG_DIR")
+
+    -- Available spawn strategies:
+    --   SpawnCommandInNewWindow  -> open in a new window
+    --   SpawnCommandInNewTab     -> open in a new tab (current window)
+    --   SpawnCommand             -> run in the current pane
+    -- Adjust based on your workflow preference.
+
+    window:perform_action(
+      act.SpawnCommandInNewTab({
+        args = { editor, config },
+      }),
+      window:active_pane()
+    )
+  end),
+},
+
   -- ---------------------------------------------------
   -- Function Keys / System
   -- ---------------------------------------------------
