@@ -1,6 +1,6 @@
 # Architecture
 
-This document details the internal structure and design philosophy of this WezTerm configuration. The project is built to provide a modular, Neovim-inspired workflow with strong separation of concerns, cross-platform support, and maintainable code over the long term.
+This document details the internal structure and design philosophy of this WezTerm configuration. The project is designed to provide a modular, Neovim-inspired workflow with strong separation of concerns, cross-platform support, and maintainable code for the long term.
 
 ---
 
@@ -8,7 +8,7 @@ This document details the internal structure and design philosophy of this WezTe
 
 ### 1. Modular Composition
 
-The configuration is split into focused modules instead of a monolithic `wezterm.lua`. Each module has a well-defined responsibility.
+The configuration is organized into focused modules instead of a monolithic `wezterm.lua`. Each module has a well-defined responsibility.
 
 **Benefits:**
 
@@ -21,16 +21,16 @@ The configuration is split into focused modules instead of a monolithic `wezterm
 
 ### 2. Separation of Concerns
 
-The project is organized into logical layers:
+The project is structured into logical layers:
 
 * **Entry layer** bootstrapper
 * **Configuration layer** terminal behavior and composition
 * **Utility layer** reusable helper functions
 * **Event layer** UI-driven behavior
 * **Asset layer** backgrounds and visual resources
-* **Tooling layer** formatting, linting, and IDE configuration
+* **Tooling layer** formatting, linting, IDE configuration
 
-Each layer has a clearly defined purpose and avoids leaking responsibilities.
+Each layer has a clear purpose and avoids leaking responsibilities.
 
 ---
 
@@ -58,7 +58,7 @@ The root file acts as a minimal bootstrapper.
 * Load the main configuration (`config/init.lua`)
 * Return the composed configuration table
 
-Business logic does not reside here; all behavior lives in `config/`, `utils/`, or `events/`.
+Business logic does not reside here; all behavior is handled in `config/`, `utils/`, or `events/`.
 
 ---
 
@@ -80,7 +80,7 @@ config/
 
 ### `init.lua`
 
-The central composition module.
+Central composition module.
 
 **Responsibilities:**
 
@@ -124,7 +124,7 @@ Handles font configuration:
 * Primary and fallback fonts
 * Font rules and scaling
 
-Separation allows safe font experimentation.
+Separation allows safe experimentation with fonts.
 
 ---
 
@@ -175,7 +175,7 @@ utils/
 
 ### `platform.lua`
 
-Detects OS and platform-specific behavior.
+Detects OS and platform-specific behavior:
 
 * Maps modifiers correctly
 * Adjusts domain logic
@@ -198,17 +198,17 @@ Keeps asset logic separate from keybindings.
 
 ### `gpu_adapter.lua`
 
-Handles GPU selection and performance configuration.
+Handles GPU selection and performance configuration:
 
-Improves portability and system-specific performance tuning.
+* Improves portability and system-specific tuning
 
 ---
 
 ### `math.lua`
 
-Provides reusable numeric helpers.
+Provides reusable numeric helpers:
 
-Keeps calculation logic outside configuration modules.
+* Keeps calculation logic outside configuration modules
 
 ---
 
@@ -242,13 +242,13 @@ colors/
 └── custom.lua
 ```
 
-Defines color schemes. Allows multiple themes without touching `appearance.lua`.
+Defines color schemes and allows multiple themes without modifying `appearance.lua`.
 
 ---
 
 ## Asset Layer `backdrops/`
 
-Stores background images. Dynamically read by `utils/backdrops.lua`.
+Stores background images dynamically read by `utils/backdrops.lua`.
 
 **Advantages:**
 
@@ -292,7 +292,7 @@ Provides:
 | `.luacheckrc`  | Static analysis rules             |
 | `.luarc.json`  | Lua language server configuration |
 
-Ensures consistent formatting, linting, and IDE intelligence, and supports CI pipelines.
+Ensures consistent formatting, linting, and IDE intelligence, supporting CI pipelines.
 
 ---
 
@@ -339,7 +339,7 @@ To add new features:
 1. Add keybindings in `config/bindings.lua`
 1. Wire new configuration inside `config/init.lua`
 
-Avoid placing logic inside `wezterm.lua`.
+Avoid placing logic directly in `wezterm.lua`.
 
 ---
 

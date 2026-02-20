@@ -1,7 +1,7 @@
+---
+
 <div align="center">
-
   <img src="./wzterm.png" alt="WezTerm Dev Environment" width="1000"/>
-
 </div>
 
 ---
@@ -18,23 +18,25 @@
 
 ---
 
-wezterm **configuration**, built for developers who value speed, clarity, and complete control over their terminal workflow.
+A structured and modular **WezTerm configuration** built for developers who value speed, clarity, and full control over their terminal workflow.
 
 ---
 
-## Core Goals
+# Core Goals
 
 * Clean and maintainable architecture
 * Cross-platform consistency
 * Modal keybindings with leader modes
 * Intelligent pane navigation
-* Structured and safe extensibility
+* Safe and structured extensibility
 
 ---
 
-## What Is WezTerm
+# What Is WezTerm
 
-WezTerm is a GPU-accelerated terminal emulator and multiplexer written in Rust. It provides:
+[WezTerm](https://wezfurlong.org/wezterm/) is a GPU-accelerated terminal emulator and multiplexer written in Rust.
+
+It provides:
 
 * Multiple tabs and split panes
 * Cross-platform support (macOS, Linux, Windows, BSD)
@@ -47,7 +49,7 @@ Official documentation:
 
 ---
 
-## ✨ Features
+# Features
 
 * GPU-accelerated rendering
 * Dynamic background system
@@ -56,18 +58,20 @@ Official documentation:
 * Event-driven status line
 * Native WSL integration on Windows
 * Font scaling
-* Pane resizing
-* Pane swapping
+* Pane resizing and swapping
 
 ---
 
-## 🛠 Installation
+# Installation
 
 Follow the instructions for your platform.
 
 ---
 
-### macOS
+<details>
+<summary><strong>Linux and macOS</strong></summary>
+
+## macOS
 
 Install using Homebrew:
 
@@ -77,19 +81,21 @@ brew install wezterm
 
 ---
 
-### Ubuntu / Debian
+## Ubuntu or Debian
 
 ```bash
 sudo apt update
 sudo apt install wezterm
 ```
 
-If the package is unavailable in your repositories, use the official guide:
+If the package is unavailable in your repositories, follow the official guide:
 [https://wezfurlong.org/wezterm/installation.html](https://wezfurlong.org/wezterm/installation.html)
+
+</details>
 
 ---
 
-### Windows
+## Windows
 
 Install using Windows Package Manager:
 
@@ -99,15 +105,15 @@ winget install wez.wezterm
 
 ---
 
-## Configuration Setup
+# Configuration Setup
 
 After installing WezTerm, replace your existing configuration with this one.
 
 ---
 
-## Linux / macOS
+## Linux or macOS
 
-### 1. Back up existing configuration
+### 1. Back up your existing configuration
 
 ```bash
 mv ~/.config/wezterm ~/.config/wezterm.bak
@@ -121,29 +127,27 @@ git clone https://github.com/hetfs/wezterm ~/.config/wezterm
 
 ### 3. Remove Git history (optional)
 
-If you plan to manage this setup inside your own repository:
-
 ```bash
 rm -rf ~/.config/wezterm/.git
 ```
 
 ---
 
-## Windows
+## Windows (PowerShell)
 
-### 1. Back up existing configuration on Windows
+### 1. Back up your existing configuration
 
 ```powershell
 Move-Item $env:USERPROFILE\.config\wezterm $env:USERPROFILE\.config\wezterm.bak
 ```
 
-### 2. Clone this configuration in powershell
+### 2. Clone this configuration
 
 ```powershell
-git clone https://github.com/hetfs/wezterm  $env:USERPROFILE\.config\wezterm
+git clone https://github.com/hetfs/wezterm $env:USERPROFILE\.config\wezterm
 ```
 
-### 3. Remove Git history on Windows (optional)
+### 3. Remove Git history (optional)
 
 ```powershell
 Remove-Item $env:USERPROFILE\.config\wezterm\.git -Recurse -Force
@@ -151,7 +155,7 @@ Remove-Item $env:USERPROFILE\.config\wezterm\.git -Recurse -Force
 
 ---
 
-## Launching WezTerm
+# Launching WezTerm
 
 WezTerm automatically loads its configuration from:
 
@@ -165,9 +169,10 @@ Use it when extending or debugging your setup.
 To quickly open your configuration directory from within WezTerm:
 
 ```bash
-# customize keybinding
-CTRL + ~
+CTRL + `
 ```
+
+> The key combination is mapped to `Ctrl + ~`.
 
 ---
 
@@ -175,19 +180,19 @@ CTRL + ~
 
 ## Modifier Abstraction
 
-| Name     | macOS Mapping | Windows/Linux Mapping |            |
-| -------- | ------------- | --------------------- | ---------- |
-| `SUPER`  | ⌘ Command     | Alt                   |            |
-| `SUPER   | CTRL`         | ⌘ + Ctrl              | Alt + Ctrl |
-| `LEADER` | SUPER + Space | Ctrl + Space          |            |
+| Name           | macOS Mapping | Windows/Linux Mapping |
+| -------------- | ------------- | --------------------- |
+| `SUPER`        | ⌘ Command     | Alt                   |
+| `SUPER + CTRL` | ⌘ + Ctrl      | Alt + Ctrl            |
+| `LEADER`       | SUPER + Space | Ctrl + Space          |
 
-`LEADER` is defined as `Space` combined with `SUPER|CTRL`.
+`LEADER` is defined as `Space` combined with `SUPER + CTRL`.
 
 ---
 
 ## Editable Modules
 
-You can safely customize the following:
+You can safely customize the following modules:
 
 * Keybindings → `config/bindings.lua`
 * Fonts → `config/fonts.lua`
@@ -197,16 +202,18 @@ You can safely customize the following:
 
 The modular structure allows experimentation without affecting unrelated components.
 
-*Documentation*:
+---
+
+# Documentation
 
 * Full `bindings.lua` customization reference: [document](./docs/bindings.md)
 * Example `example-key.lua` for designing a modular keybinding system: [example keybindings](./docs/example-keys.lua)
-* Check the [Architecture](./docs/architecture.md) overview
-* For advanced platform-specific details, see [official default key assignments](https://wezterm.org/config/default-keys.html)
+* Architecture overview: [Architecture](./docs/architecture.md)
+* Advanced platform-specific details: [official default key assignments](https://wezterm.org/config/default-keys.html)
 
 ---
 
-## Roadmap
+# Roadmap
 
 * Multiple theme presets
 * Workspace presets
@@ -216,11 +223,11 @@ The modular structure allows experimentation without affecting unrelated compone
 
 ---
 
-## Philosophy
+# Philosophy
 
 This configuration is designed as a structured project rather than a single-file dotfile.
 
-*Guiding principles*:
+**Guiding principles:**
 
 * Intentional key design
 * Modal interaction
@@ -230,6 +237,6 @@ This configuration is designed as a structured project rather than a single-file
 
 ---
 
-## Star History
+# Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hetfs/wezterm.git\&type=timeline\&legend=top-left)](https://www.star-history.com/#hetfs/wezterm.git&type=timeline&legend=top-left)

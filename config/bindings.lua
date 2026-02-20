@@ -1,5 +1,44 @@
 -- =====================================================
--- WezTerm Configuration
+-- WezTerm Key Bindings Configuration
+-- =====================================================
+-- Beginner-Friendly Overview:
+--
+-- This file defines all custom key and mouse bindings for WezTerm.
+-- Sections explained:
+--
+-- 1. Platform Modifiers
+--    - Sets modifier keys depending on your OS (Mac, Windows, Linux)
+--    - SUPER is used for most workflow keys
+--    - SUPER_REV is SUPER + CTRL (or ALT + CTRL on non-Mac)
+--
+-- 2. Key Bindings
+--    - Organized by functionality:
+--       * Open configuration
+--       * Function keys / system commands
+--       * Search / quick select
+--       * Clipboard operations
+--       * Tab management
+--       * Window controls
+--       * Font size adjustments
+--       * Pane management
+--       * Background image control
+--       * Optional Leader-mode pane shortcuts (commented)
+--
+--    - Each key binding follows this format:
+--       { key = "KeyName", mods = "Modifier(s)", action = Action }
+--
+-- 3. Mouse Bindings
+--    - Defines what happens on clicks and selection with mouse buttons
+--
+-- 4. Final Config
+--    - Combines all key and mouse bindings
+--    - Disables default WezTerm key bindings
+--    - Sets leader key and timeout for leader-based shortcuts
+--
+-- Tip for beginners:
+-- - Look at each section individually to understand how your terminal behaves
+-- - SUPER is the main modifier you will use (ALT on Windows/Linux)
+-- - Leader shortcuts (commented) can be enabled for modal-like behavior
 -- =====================================================
 
 local wezterm = require("wezterm")
@@ -28,31 +67,24 @@ end
 
 local keys = {
 
--- =====================================================
--- Open WezTerm configuration in your editor
--- =====================================================
-{
-  key = "`",
-  mods = "CTRL",
-  action = wezterm.action_callback(function(window)
-    local editor = os.getenv("EDITOR") or "nvim"
-    -- local config = os.getenv("WEZTERM_CONFIG_FILE")
-	local config =  os.getenv("WEZTERM_CONFIG_DIR")
+  -- =====================================================
+  -- Open WezTerm configuration in your editor
+  -- =====================================================
+  {
+    key = "`",
+    mods = "CTRL",
+    action = wezterm.action_callback(function(window)
+      local editor = os.getenv("EDITOR") or "nvim"
+      local config = os.getenv("WEZTERM_CONFIG_DIR")
 
-    -- Available spawn strategies:
-    --   SpawnCommandInNewWindow  -> open in a new window
-    --   SpawnCommandInNewTab     -> open in a new tab (current window)
-    --   SpawnCommand             -> run in the current pane
-    -- Adjust based on your workflow preference.
-
-    window:perform_action(
-      act.SpawnCommandInNewTab({
-        args = { editor, config },
-      }),
-      window:active_pane()
-    )
-  end),
-},
+      window:perform_action(
+        act.SpawnCommandInNewTab({
+          args = { editor, config },
+        }),
+        window:active_pane()
+      )
+    end),
+  },
 
   -- ---------------------------------------------------
   -- Function Keys / System
@@ -111,6 +143,7 @@ local keys = {
   { key = "t", mods = mod.SUPER, action = act.SpawnTab("DefaultDomain") },
   { key = "t", mods = mod.SUPER_REV, action = act.SpawnTab({ DomainName = "WSL:Ubuntu" }) },
   { key = "w", mods = mod.SUPER_REV, action = act.CloseCurrentTab({ confirm = false }) },
+
   { key = "[", mods = mod.SUPER, action = act.ActivateTabRelative(-1) },
   { key = "]", mods = mod.SUPER, action = act.ActivateTabRelative(1) },
   { key = "[", mods = mod.SUPER_REV, action = act.MoveTabRelative(-1) },
@@ -194,30 +227,26 @@ local keys = {
     }),
   },
 
-    ---------------------------------------------------------------------
-    ----- Pane Management (Leader)
-    ---------------------------------------------------------------------
-    ---{ key = "LeftArrow", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-    ---{ key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-    ---{ key = "UpArrow", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-    ---{ key = "DownArrow", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-    ---
-    ---{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
-    ---{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-    ---{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
-    ---{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
-    ---
-    -- { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 3 }) },
-    -- { key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 3 }) },
-    -- { key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 3 }) },
-    -- { key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 3 }) },
-    ---
-    ---{ key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    ---{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-    ---{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-    ---{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
+  ---------------------------------------------------------------------
+  -- Pane Management (Leader) - uncomment to enable
+  ---------------------------------------------------------------------
+  ---{ key = "LeftArrow", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+  ---{ key = "RightArrow", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+  ---{ key = "UpArrow", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+  ---{ key = "DownArrow", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+  ---{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
+  ---{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
+  ---{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
+  ---{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
+  -- { key = "H", mods = "LEADER", action = act.AdjustPaneSize({ "Left", 3 }) },
+  -- { key = "L", mods = "LEADER", action = act.AdjustPaneSize({ "Right", 3 }) },
+  -- { key = "K", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 3 }) },
+  -- { key = "J", mods = "LEADER", action = act.AdjustPaneSize({ "Down", 3 }) },
+  ---{ key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  ---{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  ---{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+  ---{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 }
-
 
 -- =====================================================
 -- Mouse Bindings

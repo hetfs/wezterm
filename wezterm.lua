@@ -12,11 +12,11 @@
 -- Load the core configuration module
 local Config = require('config')
 
--- Initialize and randomize backdrops
+-- Initialize and randomize background images
 local backdrops = require('utils.backdrops')
 backdrops:set_files():random()
 
--- Initialize event handlers
+-- Load and initialize event handlers
 local right_status   = require('events.right-status')
 local left_status    = require('events.left-status')
 local tab_title      = require('events.tab-title')
@@ -27,7 +27,7 @@ left_status.setup()
 tab_title.setup()
 new_tab_button.setup()
 
--- Assemble the configuration by appending modules
+-- Assemble the configuration by appending individual modules
 return Config:init()
    :append(require('config.appearance'))
    :append(require('config.bindings'))
