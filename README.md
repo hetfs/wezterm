@@ -267,7 +267,7 @@ This configuration is designed as a structured project rather than a single-file
 * Clean internal architecture
 * Long-term maintainability
 
-What's new in wezterm [configuration](./docs/what-is-new.md)
+What's new in [wezterm configuration](./docs/what-is-new.md)
 
 ---
 
