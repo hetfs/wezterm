@@ -55,7 +55,7 @@ function BackDrops:_set_opt(window)
         source = { Color = colors.background },
         height = "100%",
         width = "100%",
-        opacity = 0.96,
+        opacity = 0.90,
       },
     },
   }
