@@ -26,7 +26,7 @@ return {
       source = { Color = colors.background },        -- Overlay color with opacity
       height = "100%",
       width = "100%",
-      opacity = 0.90,
+      opacity = 0.95,
     },
   },
 

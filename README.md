@@ -1,7 +1,7 @@
----
-
 <div align="center">
-  <img src="./wzterm.png" alt="WezTerm Dev Environment" width="1000"/>
+
+  <img src="./wzterm.png" alt="WezTerm Development Environment" width="1000"/>
+
 </div>
 
 ---
@@ -18,21 +18,21 @@
 
 ---
 
-A structured and modular **WezTerm configuration** built for developers who value speed, clarity, and full control over their terminal workflow.
+A structured and modular **WezTerm configuration** crafted for developers who value speed, clarity, and full control over their terminal workflow.
 
 ---
 
-# Core Goals
+## Core Goals
 
 * Clean and maintainable architecture
-* Cross-platform consistency
-* Modal keybindings with leader modes
+* Consistent cross-platform experience
+* Modal keybindings powered by a leader system
 * Intelligent pane navigation
-* Safe and structured extensibility
+* Safe and extensible structure
 
 ---
 
-# What Is WezTerm
+## What Is WezTerm
 
 [WezTerm](https://wezfurlong.org/wezterm/) is a GPU-accelerated terminal emulator and multiplexer written in Rust.
 
@@ -44,12 +44,9 @@ It provides:
 * Native SSH and WSL integration
 * High-performance GPU rendering
 
-Official documentation:
-[https://wezfurlong.org/wezterm/](https://wezfurlong.org/wezterm/)
-
 ---
 
-# Features
+## Features
 
 * GPU-accelerated rendering
 * Dynamic background system
@@ -57,18 +54,19 @@ Official documentation:
 * Cross-platform modifier abstraction
 * Event-driven status line
 * Native WSL integration on Windows
-* Font scaling
+* Font scaling controls
 * Pane resizing and swapping
 
 ---
 
-# Installation
+## Installation
 
 Follow the instructions for your platform.
 
 ---
 
 <details>
+
 <summary><strong>Linux and macOS</strong></summary>
 
 ## macOS
@@ -88,28 +86,60 @@ sudo apt update
 sudo apt install wezterm
 ```
 
-If the package is unavailable in your repositories, follow the official guide:
-[https://wezfurlong.org/wezterm/installation.html](https://wezfurlong.org/wezterm/installation.html)
+---
+
+## Arch Linux
+
+Install from the community repository:
+
+```bash
+sudo pacman -S wezterm
+```
+
+If the package is unavailable in your repositories, follow the [official guide](https://wezfurlong.org/wezterm/installation.html)
 
 </details>
 
 ---
 
-## Windows
+<details>
 
-Install using Windows Package Manager:
+<summary><strong>Windows</strong></summary>
+
+Install using one of the following package managers:
+
+## winget
 
 ```powershell
 winget install wez.wezterm
 ```
 
+## Chocolatey
+
+```powershell
+choco install wezterm
+```
+
+## Scoop
+
+```powershell
+scoop install wezterm
+```
+
+Alternatively, download the latest release from the [official website](https://wezterm.org/install/windows.html).
+
+</details>
+
 ---
 
-# Configuration Setup
+## Configuration Setup
 
 After installing WezTerm, replace your existing configuration with this one.
 
 ---
+
+<details>
+<summary><strong>Linux and macOS configuration</strong></summary>
 
 ## Linux or macOS
 
@@ -119,7 +149,7 @@ After installing WezTerm, replace your existing configuration with this one.
 mv ~/.config/wezterm ~/.config/wezterm.bak
 ```
 
-### 2. Clone this configuration
+### 2. Clone this repository
 
 ```bash
 git clone https://github.com/hetfs/wezterm ~/.config/wezterm
@@ -131,7 +161,12 @@ git clone https://github.com/hetfs/wezterm ~/.config/wezterm
 rm -rf ~/.config/wezterm/.git
 ```
 
+</details>
+
 ---
+
+<details>
+<summary><strong>Windows configuration</strong></summary>
 
 ## Windows (PowerShell)
 
@@ -141,7 +176,7 @@ rm -rf ~/.config/wezterm/.git
 Move-Item $env:USERPROFILE\.config\wezterm $env:USERPROFILE\.config\wezterm.bak
 ```
 
-### 2. Clone this configuration
+### 2. Clone this repository
 
 ```powershell
 git clone https://github.com/hetfs/wezterm $env:USERPROFILE\.config\wezterm
@@ -153,13 +188,19 @@ git clone https://github.com/hetfs/wezterm $env:USERPROFILE\.config\wezterm
 Remove-Item $env:USERPROFILE\.config\wezterm\.git -Recurse -Force
 ```
 
+</details>
+
 ---
 
-# Launching WezTerm
+## Launching WezTerm
+
+```powershell
+wezterm
+```
 
 WezTerm automatically loads its configuration from:
 
-```
+```bash
 $HOME/.config/wezterm/wezterm.lua
 ```
 
@@ -168,17 +209,15 @@ Use it when extending or debugging your setup.
 
 To quickly open your configuration directory from within WezTerm:
 
-```bash
-CTRL + `
+```text
+Ctrl + `
 ```
 
-> The key combination is mapped to `Ctrl + ~`.
+> This key combination is mapped to `Ctrl + ~`.
 
 ---
 
-# Customization
-
-## Modifier Abstraction
+# Modifier Abstraction
 
 | Name           | macOS Mapping | Windows/Linux Mapping |
 | -------------- | ------------- | --------------------- |
@@ -200,20 +239,20 @@ You can safely customize the following modules:
 * Background behavior → `utils/backdrops.lua`
 * Status line events → `events/`
 
-The modular structure allows experimentation without affecting unrelated components.
+The modular structure allows you to experiment without impacting unrelated components.
 
 ---
 
-# Documentation
+## Documentation
 
-* Full `bindings.lua` customization reference: [document](./docs/bindings.md)
-* Example `example-key.lua` for designing a modular keybinding system: [example keybindings](./docs/example-keys.lua)
+* Full `bindings.lua` reference: [Bindings Documentation](./docs/bindings.md)
+* Example modular keybinding system: [example-keybindings](./docs/example-keys.lua)
 * Architecture overview: [Architecture](./docs/architecture.md)
-* Advanced platform-specific details: [official default key assignments](https://wezterm.org/config/default-keys.html)
+* Official [default key assignments](https://wezterm.org/config/default-keys.html)
 
 ---
 
-# Roadmap
+## Roadmap
 
 * Multiple theme presets
 * Workspace presets
@@ -223,11 +262,11 @@ The modular structure allows experimentation without affecting unrelated compone
 
 ---
 
-# Philosophy
+## Philosophy
 
 This configuration is designed as a structured project rather than a single-file dotfile.
 
-**Guiding principles:**
+**Guiding principles**
 
 * Intentional key design
 * Modal interaction
@@ -237,6 +276,22 @@ This configuration is designed as a structured project rather than a single-file
 
 ---
 
-# Star History
+## ☕ Support My Work
+
+<div align="center">
+
+[![Support: Buy Me a Coffee](https://img.shields.io/badge/Support-Buy_Me_a_Coffee-FFDD00?style=for-the-badge\&logo=buymeacoffee\&logoColor=black)](https://www.buymeacoffee.com/hetfs01f)
+
+[![Facebook](https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/facebook/default.svg)](https://m.facebook.com/profile.php?id=100090714730738)
+[![Telegram](https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/telegram/default.svg)](https://t.me/+h941uu74P6I0NDY0)
+[![LinkedIn](https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg)](https://linkedin.com)
+[![X/Twitter](https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/twitter/default.svg)](https://x.com/hetf01)
+[![YouTube](https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/youtube/default.svg)](https://youtube.com/@mastercli)
+
+</div>
+
+---
+
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hetfs/wezterm.git\&type=timeline\&legend=top-left)](https://www.star-history.com/#hetfs/wezterm.git&type=timeline&legend=top-left)
