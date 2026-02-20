@@ -8,11 +8,11 @@
 
 <div align="center">
 
-[![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-blue?logo=wezterm)](https://wezterm.org/)
+[![WezTerm](https://img.shields.io/badge/WezTerm-Terminal%20Emulator-%234E49EE?logo=wezterm)](https://wezterm.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Written in Lua](https://img.shields.io/badge/Config-Lua-2C2D72?logo=lua)](https://www.lua.org/about.html)
 [![GitHub Stars](https://img.shields.io/github/stars/hetfs/wezterm?style=social)](https://github.com/hetfs/wezterm/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/hetfs/wezterm)](https://github.com/hetfs/wezterm/issues)
+[![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-red?logo=github)](https://github.com/hetfs/wezterm/issues)
 
 </div>
 
@@ -46,7 +46,7 @@ It provides:
 
 ---
 
-## Features
+## ✨ Features
 
 * GPU-accelerated rendering
 * Dynamic background system
@@ -59,15 +59,14 @@ It provides:
 
 ---
 
-## Installation
+## 🛠️ Installation
 
 Follow the instructions for your platform.
 
 ---
 
 <details>
-
-<summary><strong>Linux and macOS</strong></summary>
+  <summary><strong>Linux and macOS</strong></summary>
 
 ## macOS
 
@@ -77,16 +76,12 @@ Install using Homebrew:
 brew install wezterm
 ```
 
----
-
 ## Ubuntu or Debian
 
 ```bash
 sudo apt update
 sudo apt install wezterm
 ```
-
----
 
 ## Arch Linux
 
@@ -103,8 +98,7 @@ If the package is unavailable in your repositories, follow the [official guide](
 ---
 
 <details>
-
-<summary><strong>Windows</strong></summary>
+  <summary><strong>Windows</strong></summary>
 
 Install using one of the following package managers:
 
@@ -132,14 +126,12 @@ Alternatively, download the latest release from the [official website](https://w
 
 ---
 
-## Configuration Setup
+## ⚙️ Configuration Setup
 
 After installing WezTerm, replace your existing configuration with this one.
 
----
-
 <details>
-<summary><strong>Linux and macOS configuration</strong></summary>
+  <summary><strong>Linux and macOS configuration</strong></summary>
 
 ## Linux or macOS
 
@@ -166,7 +158,7 @@ rm -rf ~/.config/wezterm/.git
 ---
 
 <details>
-<summary><strong>Windows configuration</strong></summary>
+  <summary><strong>Windows configuration</strong></summary>
 
 ## Windows (PowerShell)
 
@@ -209,7 +201,8 @@ Use it when extending or debugging your setup.
 
 To quickly open your configuration directory from within WezTerm:
 
-```text
+```bash
+# customize keybinding
 Ctrl + `
 ```
 
@@ -217,7 +210,7 @@ Ctrl + `
 
 ---
 
-# Modifier Abstraction
+## Modifier Abstraction
 
 | Name           | macOS Mapping | Windows/Linux Mapping |
 | -------------- | ------------- | --------------------- |
@@ -266,13 +259,15 @@ The modular structure allows you to experiment without impacting unrelated compo
 
 This configuration is designed as a structured project rather than a single-file dotfile.
 
-**Guiding principles**
+**Guiding principles**:
 
 * Intentional key design
 * Modal interaction
 * Cross-platform reliability
 * Clean internal architecture
 * Long-term maintainability
+
+What's new in wezterm [configuration](./docs/what-is-new.md)
 
 ---
 
