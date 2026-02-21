@@ -94,81 +94,85 @@ The configuration uses **platform-specific modifiers** to handle differences bet
 
 ## Font Size Control
 
-| Shortcut   | Action             |
-| ---------- | ------------------ |
-| `CTRL + =` | Increase font size |
-| `CTRL + -` | Decrease font size |
-| `CTRL + 0` | Reset font size    |
+Use these shortcuts to quickly adjust the font size:
+
+| Shortcut   | Action                |
+| ---------- | --------------------- |
+| `CTRL + =` | Increase font size    |
+| `CTRL + -` | Decrease font size    |
+| `CTRL + 0` | Reset to default size |
+
+> You can modify the default font configuration in [`config/fonts.lua`](../config/fonts.lua).
 
 ---
 
-## Pane Management
+## pane management
 
-| Shortcut              | Action                                |
+| shortcut              | action                                |
 | --------------------- | ------------------------------------- |
-| `SUPER + \`           | Split vertical pane                   |
-| `SUPER_REV + \`       | Split horizontal pane                 |
-| `SUPER_REV + z`       | Toggle pane zoom                      |
-| `SUPER_REV + h/j/k/l` | Navigate panes (Left/Down/Up/Right)   |
-| `SUPER_REV + H/J/K/L` | Resize panes by 3 cells               |
-| `SUPER_REV + p`       | Swap with active pane (pane selector) |
-| `SUPER + w`           | Close current pane                    |
+| `super + \`           | split vertical pane                   |
+| `super_rev + \`       | split horizontal pane                 |
+| `super_rev + z`       | toggle pane zoom                      |
+| `super_rev + h/j/k/l` | navigate panes (left/down/up/right)   |
+| `super_rev + h/j/k/l` | resize panes by 3 cells               |
+| `super_rev + p`       | swap with active pane (pane selector) |
+| `super + w`           | close current pane                    |
 
-> Optional **LEADER** bindings allow similar navigation without pressing SUPER directly.
+> optional **leader** bindings allow similar navigation without pressing super directly.
 
 ---
 
-## Background Control
+## background control
 
-| Shortcut        | Action                      |
+| shortcut        | action                      |
 | --------------- | --------------------------- |
-| `SUPER + /`     | Random background           |
-| `SUPER + ,`     | Previous background         |
-| `SUPER + .`     | Next background             |
-| `SUPER_REV + /` | Select background from menu |
+| `super + /`     | random background           |
+| `super + ,`     | previous background         |
+| `super + .`     | next background             |
+| `super_rev + /` | select background from menu |
 
 ---
 
-## Mouse Bindings
+## mouse bindings
 
-| Action                 | Mouse & Modifiers |
+| action                 | mouse & modifiers |
 | ---------------------- | ----------------- |
-| Copy selection         | Left click        |
-| Open link under cursor | CTRL + Left click |
-| Select text at cursor  | Triple-click Left |
+| copy selection         | left click        |
+| open link under cursor | ctrl + left click |
+| select text at cursor  | triple-click left |
 
 ---
 
-## Leader Key Mode
+## leader key mode
 
-The **leader key** is:
+the **leader key** is:
 
 ```
-Space + SUPER_REV
+space + super_rev
 ```
 
-After pressing it, you can trigger special pane or tab actions (currently commented out for optional use).
+after pressing it, you can trigger special pane or tab actions (currently commented out for optional use).
 
-*Example*:
+*example*:
 
 ```lua
--- Activate left pane:
- { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") }
+-- activate left pane:
+ { key = "h", mods = "leader", action = act.activatepanedirection("left") }
 ```
 
-> Using leader mode reduces conflicts with normal keybindings and allows modal commands similar to Vim.
+> using leader mode reduces conflicts with normal keybindings and allows modal commands similar to vim.
 
 ---
 
-## Summary
+## summary
 
-This keybindings configuration provides:
+this keybindings configuration provides:
 
-* Easy access to configuration files
-* Quick navigation for tabs and panes
-* Clipboard and font control
-* Search and quick selection features
-* Dynamic background management
-* Cross-platform consistency with SUPER / SUPER_REV
+* easy access to configuration files
+* quick navigation for tabs and panes
+* clipboard and font control
+* search and quick selection features
+* dynamic background management
+* cross-platform consistency with super / super_rev
 
-By mastering these shortcuts, you can navigate WezTerm efficiently like a pro.
+by mastering these shortcuts, you can navigate wezterm efficiently like a pro.
